@@ -30,6 +30,16 @@
 #### OpenACC:
 
 #### NextSilicon:
+* Add `WorkTag` support to `RangePolicy` `parallel_for` and fix host/device execution-context detection and abort handling [\#9491](https://github.com/kokkos/kokkos/pull/9491)
+* Extend support for parallel patterns:
+  * Add `RangePolicy` `parallel_reduce` and `parallel_scan` [\#9520](https://github.com/kokkos/kokkos/pull/9520) [\#9569](https://github.com/kokkos/kokkos/pull/9569)
+  * Add `MDRangePolicy` `parallel_for` and `parallel_reduce` [\#9593](https://github.com/kokkos/kokkos/pull/9593) [\#9622](https://github.com/kokkos/kokkos/pull/9622)
+  * Add `TeamPolicy` `parallel_for` and `parallel_reduce`, nested team and vector operations, and team scratch memory. Team size and vector length are currently limited to one [\#9594](https://github.com/kokkos/kokkos/pull/9594)
+* Support native atomic add, subtract, minimum, and maximum operations through the bundled desul update [\#9528](https://github.com/kokkos/kokkos/pull/9528)
+* Defer NextAPI calls until `Kokkos::initialize` to avoid MPI errors caused by initialization before `MPI_Init` [\#9358](https://github.com/kokkos/kokkos/pull/9358)
+* Pin the device-access mutex to host memory [\#9359](https://github.com/kokkos/kokkos/pull/9359)
+* Throw `BadAlloc` when allocation in `NextSiliconSpace` fails, and report the correct logical allocation size to Kokkos Tools for zero-sized Views [\#9356](https://github.com/kokkos/kokkos/pull/9356) [\#9337](https://github.com/kokkos/kokkos/pull/9337)
+* Fix export of the NextAPI CMake target for downstream applications [\#9703](https://github.com/kokkos/kokkos/pull/9703)
 
 #### HPX:
 * Reorder destruction of the default instance on `Kokkos::finalize` to prevent memory leaks [\#9443](https://github.com/kokkos/kokkos/pull/9443)
@@ -142,7 +152,11 @@
 * Fix OpenACC `parallel_scan` chunk boundary race [\#9078](https://github.com/kokkos/kokkos/pull/9078)
 
 #### NextSilicon:
-* Add `NextSilicon` execution space and `NextSiliconSharedSpace` memory space [\#8998](https://github.com/kokkos/kokkos/pull/8998) [\#9100](https://github.com/kokkos/kokkos/pull/9100)
+* Add `NextSilicon` execution space and `NextSiliconSharedSpace` memory space [\#8998](https://github.com/kokkos/kokkos/pull/8998)
+* Add `RangePolicy` `parallel_for`, `deep_copy`, and compiler portability support [\#9100](https://github.com/kokkos/kokkos/pull/9100)
+* Support dispatching to the same execution-space instance from multiple host threads, with per-thread execution-context tracking for `KOKKOS_IF_ON_HOST` and `KOKKOS_IF_ON_DEVICE` [\#9272](https://github.com/kokkos/kokkos/pull/9272)
+* Keep atomics enabled in Trilinos builds using the NextSilicon backend [\#9172](https://github.com/kokkos/kokkos/pull/9172)
+* Add a CTest wrapper for runtime setup and teardown, supporting training/handoff and telemetry-less execution [\#9173](https://github.com/kokkos/kokkos/pull/9173)
 
 #### HPX:
 * Fix team `parallel_reduce` [\#9138](https://github.com/kokkos/kokkos/pull/9138)
